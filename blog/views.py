@@ -60,3 +60,11 @@ def post_add(request):
 
 def post_view(request):
 	pass
+
+
+def post_edit(request):
+	pass
+
+
+def post_delete(request):
+	pass
