@@ -8,5 +8,5 @@ def login_required(view):
         if user:
             return view(request, *args, **kw)
         else:
-            return redirect(users.create_login_url('/'))
+            return redirect(users.create_login_url("/"))
     return check_login

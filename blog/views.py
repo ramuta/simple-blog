@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.template import RequestContext
 from google.appengine.api import users
 from blog.decorators import login_required
+from blog.forms import BlogPostForm
 
 
 def blog_render(request, template, params={}):
@@ -22,8 +23,7 @@ def blog_render(request, template, params={}):
 
 
 def home(request):
-	params = {"name": "Matej"}
-	return blog_render(request, "home.html", params)
+	return blog_render(request, "home.html")
 
 
 def login(request):
@@ -37,10 +37,17 @@ def logout(request):
 @login_required
 def post_add(request):
 	if request.method == "GET":
-		return blog_render(request, "post_add.html")
+		form = BlogPostForm()
+		params = {"form": form}
+		return blog_render(request, "post_add.html", params)
+
 	elif request.method == "POST":
-		title = request.POST.get("title", "None")
-		logging.info("naslov: " + title)
+		form = BlogPostForm(request.POST)
+
+		if not form.is_valid():
+			params = {"form": form}
+			return blog_render(request, "post_add.html", params)
+
 		return blog_render(request, "home.html")
 
 
