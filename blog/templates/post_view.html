@@ -7,7 +7,7 @@
         <div class="col-md-10 col-md-offset-1">
             <h1>{{ post.title }}</h1>
             <p><strong>by {{ post.author }}</strong> on {{ post.datetime }}</p>
-            <p>{{ post.content }}</p>
+            <p>{{ post.content|linebreaks }}</p>
             {% if post.author == email %}
                 <div><a class="btn btn-success" href="/post/{{ post.key.id }}/edit">Edit</a></div>
                 <br>

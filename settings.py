@@ -200,5 +200,5 @@ LOGGING = {
 }
 
 ALLOWED_HOSTS = [
-    'djappeng1ne-beta.appspot.com'
+    'ramutablog2.appspot.com'
 ]
