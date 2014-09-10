@@ -19,6 +19,7 @@ class BlogPost(ndb.Model):
 		           content=content,
 		           author=author)
 		post.put()
+		return post
 
 	@classmethod
 	def edit(cls, post_id, title, content):
