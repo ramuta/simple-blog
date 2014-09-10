@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <h1>{{ post.title }}</h1>
+            <p><strong>by {{ post.author }}</strong> on {{ post.datetime }}</p>
+            <p>{{ post.content }}</p>
+            {% if post.author == email %}
+                <a class="btn btn-success" href="/post/{{ post.key.id }}/edit">Edit</a>
+                <a class="btn btn-danger" href="/post/{{ post.key.id }}/delete">Delete</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

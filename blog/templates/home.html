@@ -4,18 +4,23 @@
 
 {% block content %}
     {% if email %}
-        <h1>Hey {{ email }}!</h1>
-        <p>These are some blog posts especially cooked for you.</p>
         <div class="row">
             <div class="col-lg-6">
+                <h1>Hey {{ email }}!</h1>
+                <p>These are some blog posts cooked especially for you.</p>
                 {% if blog_posts %}
                     {% for post in blog_posts %}
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">{{ post.title }} <span class="label label-warning pull-right">{{ post.datetime }}</span></h3>
+                                <h3 class="panel-title"><a href="/post/{{ post.key.id }}/">{{ post.title }}</a> <span class="label label-warning pull-right">{{ post.datetime }}</span></h3>
                             </div>
                             <div class="panel-body">
-                                <p>{{ post.content }}</p>
+                                <p>
+                                    {{ post.content|truncatechars:300 }}
+                                    {% if post.content|length > 300 %}
+                                        <a href="/post/{{ post.key.id }}/">Read more</a>
+                                    {% endif %}
+                                </p>
                             </div>
                         </div>
                     {% endfor %}

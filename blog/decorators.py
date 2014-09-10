@@ -1,5 +1,7 @@
+import logging
 from django.shortcuts import redirect
 from google.appengine.api import users
+from blog.models import BlogPost
 
 
 def login_required(view):

@@ -58,13 +58,39 @@ def post_add(request):
 		return redirect("home")
 
 
-def post_view(request):
-	pass
+def post_view(request, post_id):
+	post = BlogPost.get_by_id(int(post_id))
+	params = {"post": post}
+	return blog_render(request, "post_view.html", params)
 
 
-def post_edit(request):
-	pass
+@login_required
+def post_edit(request, post_id):
+	post = BlogPost.get_by_id(int(post_id))
+	user = users.get_current_user()
+	if request.method == "GET" and post.author == user.email():
+		form = BlogPostForm({"title": post.title, "content": post.content})
+		params = {"form": form, "post": post}
+		return blog_render(request, "post_edit.html", params)
+	elif request.method == "POST" and post.author == user.email():
+		form = BlogPostForm(request.POST)
+
+		if form.is_valid():
+			BlogPost.edit(post_id=int(post_id),
+			              title=form.cleaned_data["title"],
+			              content=form.cleaned_data["content"])
+		else:
+			params = {"form": form}
+			return blog_render(request, "post_add.html", params)
+
+		return redirect("home")
+	else:
+		return redirect("forbidden")
 
 
 def post_delete(request):
 	pass
+
+
+def forbidden(request):
+	return blog_render(request, "403.html")

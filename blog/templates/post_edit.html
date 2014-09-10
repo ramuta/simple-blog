@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}edit post{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-6">
+            <form action="/post/{{ post.key.id }}/edit/" method="post">
+                {% csrf_token %}
+
+                {% for field in form %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field.errors }}
+                        {{ field }}
+                    </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-success">Submit</button>
+                <a class="btn btn-danger" href="/post/{{ post.key.id }}">Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
