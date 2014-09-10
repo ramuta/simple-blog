@@ -1,4 +1,5 @@
-from django.shortcuts import render_to_response
+import logging
+from django.shortcuts import render_to_response, render
 
 
 def home(request):
@@ -7,7 +8,12 @@ def home(request):
 
 
 def post_add(request):
-	pass
+	if request.method == "GET":
+		return render(request, "post_add.html")
+	elif request.method == "POST":
+		title = request.POST.get("title", "None")
+		logging.info("naslov: " + title)
+		return render(request, "home.html")
 
 
 def post_view(request):
