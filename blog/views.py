@@ -88,8 +88,15 @@ def post_edit(request, post_id):
 		return redirect("forbidden")
 
 
-def post_delete(request):
-	pass
+@login_required
+def post_delete(request, post_id):
+	post = BlogPost.get_by_id(int(post_id))
+	user = users.get_current_user()
+	if request.method == "POST" and post.author == user.email():
+		post.key.delete()
+		return redirect("home")
+	else:
+		return redirect("forbidden")
 
 
 def forbidden(request):

@@ -9,8 +9,12 @@
             <p><strong>by {{ post.author }}</strong> on {{ post.datetime }}</p>
             <p>{{ post.content }}</p>
             {% if post.author == email %}
-                <a class="btn btn-success" href="/post/{{ post.key.id }}/edit">Edit</a>
-                <a class="btn btn-danger" href="/post/{{ post.key.id }}/delete">Delete</a>
+                <div><a class="btn btn-success" href="/post/{{ post.key.id }}/edit">Edit</a></div>
+                <br>
+                <form action="/post/{{ post.key.id }}/delete/" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
             {% endif %}
         </div>
     </div>
