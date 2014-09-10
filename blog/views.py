@@ -55,7 +55,7 @@ def post_add(request):
 			params = {"form": form}
 			return blog_render(request, "post_add.html", params)
 
-		return blog_render(request, "home.html")
+		return redirect("home")
 
 
 def post_view(request):

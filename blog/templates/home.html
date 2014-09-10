@@ -3,5 +3,31 @@
 {% block title %}home{% endblock %}
 
 {% block content %}
-    <h1>Hello {{ email }}!</h1>
+    {% if email %}
+        <h1>Hey {{ email }}!</h1>
+        <p>These are some blog posts especially cooked for you.</p>
+        <div class="row">
+            <div class="col-lg-6">
+                {% if blog_posts %}
+                    {% for post in blog_posts %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{ post.title }}</h3>
+                            </div>
+                            <div class="panel-body">
+                                <p class="label label-warning pull-right">{{ post.datetime }}</p>
+                                <p>{{ post.content }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No blog posts yet :(</p>
+                    <p>Wait a minute... <a href="/post/add/">you can create one</a>! :)</p>
+                {% endif %}
+            </div>
+        </div>
+    {% else %}
+        <h1>Hello... you!</h1>
+        <p>Sorry, forgot who you are, can you <a href="/login">login</a>? :)</p>
+    {% endif %}
 {% endblock %}
