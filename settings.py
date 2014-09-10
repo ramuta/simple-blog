@@ -12,7 +12,7 @@ DEBUG = not APPENGINE_PRODUCTION
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    #('admin name', 'admin@gmail.com'),
 )
 
 MANAGERS = ADMINS

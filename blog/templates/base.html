@@ -16,11 +16,17 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="/">MATT RAMUTA</a>
+              <a class="navbar-brand" href="/">BLOG</a>
             </div>
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="/post/add">Add new post</a></li>
+                {% if logout %}
+                    <li><a>{{ email }}</a></li>
+                    <li><a href="/post/add">Add new post</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                {% elif login %}
+                    <li><a href="/login">Login</a></li>
+                {% endif %}
               </ul>
             </div><!--/.nav-collapse -->
           </div>
